@@ -621,7 +621,7 @@
       "chainId": "31337",
       "contracts": {
         "YourCollectible": {
-          "address": "0xf4B146FbA71F41E0592668ffbF264F1D186b2Ca8",
+          "address": "0x2B0d36FACD61B71CC05ab8F3D2355ec3631C0dd5",
           "abi": [
             {
               "inputs": [],
@@ -852,6 +852,25 @@
               "name": "fillCCC",
               "outputs": [],
               "stateMutability": "nonpayable",
+              "type": "function"
+            },
+            {
+              "inputs": [
+                {
+                  "internalType": "uint256",
+                  "name": "",
+                  "type": "uint256"
+                }
+              ],
+              "name": "filled",
+              "outputs": [
+                {
+                  "internalType": "bool",
+                  "name": "",
+                  "type": "bool"
+                }
+              ],
+              "stateMutability": "view",
               "type": "function"
             },
             {

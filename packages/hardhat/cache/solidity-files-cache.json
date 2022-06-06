@@ -785,8 +785,8 @@
       ]
     },
     "/Users/gennarogiordano/Desktop/dev.nosync/my-github/cars-certificate-NFT/packages/hardhat/contracts/YourCollectible.sol": {
-      "lastModificationDate": 1654535544057,
-      "contentHash": "205ce650d40c22fe487dcc24e85c2e0a",
+      "lastModificationDate": 1654539386909,
+      "contentHash": "9eb8b4c6e27021e2f85f06bd1a8f2fc6",
       "sourceName": "contracts/YourCollectible.sol",
       "solcConfig": {
         "version": "0.8.4",
@@ -1046,46 +1046,6 @@
       ],
       "artifacts": [
         "Base64"
-      ]
-    },
-    "/Users/gennarogiordano/Desktop/dev.nosync/my-github/cars-certificate-NFT/packages/hardhat/contracts/ToColor.sol": {
-      "lastModificationDate": 1654508232411,
-      "contentHash": "11e4840be544c20e659a97ebf49f8916",
-      "sourceName": "contracts/ToColor.sol",
-      "solcConfig": {
-        "version": "0.8.4",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata",
-                "devdoc",
-                "userdoc",
-                "storageLayout",
-                "evm.gasEstimates"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          },
-          "metadata": {
-            "useLiteralContent": true
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [],
-      "artifacts": [
-        "ToColor"
       ]
     },
     "/Users/gennarogiordano/Desktop/dev.nosync/my-github/cars-certificate-NFT/packages/hardhat/node_modules/@openzeppelin/contracts/token/ERC721/ERC721.sol": {

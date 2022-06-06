@@ -20,6 +20,7 @@ contract YourCollectible is ERC721Enumerable, Ownable {
   uint256 public price = 0.001 ether;
 
   mapping (uint256 => string) public license_plate;
+  mapping (uint256 => bool) public filled;
   mapping (uint256 => uint256) public km;
   mapping (uint256 => uint256) public car_services_done;
   mapping (uint256 => mapping (uint256 => uint256)) public km4service; //km done at car service moment -> car km history
@@ -43,7 +44,7 @@ contract YourCollectible is ERC721Enumerable, Ownable {
 
     uint256 id = _tokenIds.current();
     _mint(msg.sender, id);
-
+    filled[id] = false;
     (bool success, ) = recipient.call{value: msg.value}("");
     require(success, "could not send");
 
@@ -62,6 +63,7 @@ contract YourCollectible is ERC721Enumerable, Ownable {
     manufacturer[_tokenId] = _manufacturer;
     model[_tokenId] = _model;
     production_year[_tokenId] = _year;
+    filled[_tokenId] = true;
   }
 
   function makeCarService(uint256 _updated_km, uint256 _tokenId, string memory _message4services) public{
@@ -120,22 +122,33 @@ contract YourCollectible is ERC721Enumerable, Ownable {
   }
 
   function renderTokenById(uint256 _id) public view returns (string memory) {
-    string memory render = string(abi.encodePacked(
 
-      '<rect width="100%" height="100%" fill="', badgeColor(past_owners[_id]) ,'" />',
-      '<rect width="99%" height="99%" fill="black" />',
-      //'<text x="0" y="15" fill="white">I love SVG! Targa:', targa[id] ,'</text>'
-      '<text x="15" y="30" style="fill:white;"> ' ,manufacturer[_id], ' ', model[_id], ' ',
-        '<tspan x="15" y="85">LICENSE PLATE: </tspan>', license_plate[_id], 
-        '<tspan x="15" y="110">CHASSIS #: </tspan>', chassis_number[_id],
-        '<tspan x="15" y="135">YEAR: </tspan>', production_year[_id],
-        '<tspan x="15" y="160">KILOMETRES: </tspan>', uint2str(km[_id]),
-        '<tspan x="15" y="185">SERVICES DONE: </tspan>', uint2str(car_services_done[_id]),
-        '<tspan x="15" y="210">PAST OWNERS: </tspan>', uint2str(past_owners[_id]),
-      '</text>'
-    ));
+    if(filled[_id] == true){
+      return string(abi.encodePacked(
 
-    return render;
+        '<rect width="100%" height="100%" fill="', badgeColor(past_owners[_id]) ,'" />',
+        '<rect width="99%" height="99%" fill="black" />',
+        //'<text x="0" y="15" fill="white">I love SVG! Targa:', targa[id] ,'</text>'
+        '<text x="15" y="30" style="fill:white;"> ' ,manufacturer[_id], ' ', model[_id], ' ',
+          '<tspan x="15" y="85">LICENSE PLATE: </tspan>', license_plate[_id], 
+          '<tspan x="15" y="110">CHASSIS #: </tspan>', chassis_number[_id],
+          '<tspan x="15" y="135">YEAR: </tspan>', production_year[_id],
+          '<tspan x="15" y="160">KILOMETRES: </tspan>', uint2str(km[_id]),
+          '<tspan x="15" y="185">SERVICES DONE: </tspan>', uint2str(car_services_done[_id]),
+          '<tspan x="15" y="210">PAST OWNERS: </tspan>', uint2str(past_owners[_id]),
+        '</text>'
+      ));
+    }else{
+      return string(abi.encodePacked(
+        '<rect width="100%" height="100%" fill="blue" />',
+        '<rect width="99%" height="99%" fill="white" />',
+        '<text x="15" y="30" style="fill:blue;"> CLEAN CCC IS MINTED!',
+        '<tspan x="15" y="85">PLEASE FILL CCC</tspan>',
+        '<tspan x="15" y="110">UNDER DEBUG CONTRACT TAB</tspan>',
+        '<tspan x="15" y="135">WITH ALL INFO RELATED</tspan>',
+        '</text>'
+      ));
+    }
   }
 
   function uint2str(uint _i) internal pure returns (string memory _uintAsString) {
